@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Sign UP PAGE{% endblock %}
+{% block body %}
+<form action="/signup", method="post">
+    {{ form.hidden_tag() }}
+    <p>{{form.username.label}}<br>
+    {{form.username(size=32)}}<br>
+    </p>
+    <p>{{form.password.label}}<br>
+    {{form.password(size=32)}}<br>
+    </p>
+    <p>{{form.act_passwd.label}}<br>
+    {{form.act_passwd(size=32)}}<br>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

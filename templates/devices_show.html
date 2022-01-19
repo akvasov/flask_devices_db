@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}HOSTNAME: "{{device.hostname}}" {% endblock %}
+
+{% block body %}
+<div class="content">
+  <p><strong>ID: </strong>{{device.id}}</p>
+  <p><strong>Hostname: </strong>{{device.hostname}}</p>
+  <p><strong>IP: </strong>{{device.ip}}</p>
+  <p><strong>Chassis: </strong>{{device.chassis}}</p>
+  <p><strong>Serial number: </strong>{{device.serialnum}}</p>
+  <p><strong>Version: </strong>{{device.version}}</p>
+  <p><strong>Type: </strong>{{device.type}}</p>
+  <p><strong>Vendor: </strong>{{device.vendor}}</p>
+
+</div>
+{% endblock %}

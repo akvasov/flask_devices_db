@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Devices ordered by "Type"{% endblock %}
+
+{% block body %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Hostname</th>
+      <th>IP</th>
+      <th>Chassis</th>
+      <th>Serial_num</th>
+      <th>Version</th>
+      <th>Type</th>
+      <th>Vendor</th>
+    </tr>
+  </thead>
+  <tbody>
+  <!-- EXAMPLE ROW, substitue the real information from the devices in the database -->
+  {% for device in devices %}
+    <tr>
+      <th>{{device.id}}</th>
+      <td>{{device.hostname}}</td>
+      <td>{{device.ip}}</td>
+      <td>{{device.chassis}}</td>
+      <td>{{device.serialnum}}</td>
+      <td>{{device.version}}</td>
+      <td>{{device.type}}</td>
+      <td>{{device.vendor}}</td>
+    </tr>
+  {% endfor %}
+ </tbody>
+</table>
+{% endblock %}
+
