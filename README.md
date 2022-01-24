@@ -11,13 +11,13 @@ User:
 3. **'/logout'** #user logout
 ***
 Devices:
-1. '/devices' #provide all network devices inventory stored into PostgreSQL DB 'devices' table
-2. '/devices/<device_hostname>' #one defined device inventory stored into PostgreSQL DB 'devices' table
-3. '/api/devices' #all network devices inventory stored into PostgreSQL DB 'devices' table in JSON format
-4. '/api/devices/<device_hostname>' #one defined device inventory stored into PostgreSQL DB 'devices' table in JSON format
-5. '/api/populatedb/<device_filename>' #provide a text file with IP/hostname data to populate devices inventory
-6. '/api/add/<device_hostname>' #provide a single hostname to add it into populate network devices inventory
-7. '/api/delete/<device_hostname>' #provide a single hostname to remove it into populate network devices inventory
+1. **'/devices'** #provide all network devices inventory stored into PostgreSQL DB 'devices' table
+2. **'/devices/<device_hostname>'** #one defined device inventory stored into PostgreSQL DB 'devices' table
+3. **'/api/devices'** #all network devices inventory stored into PostgreSQL DB 'devices' table in JSON format
+4. **'/api/devices/<device_hostname>'** #one defined device inventory stored into PostgreSQL DB 'devices' table in JSON format
+5. **'/api/populatedb/<device_filename>'** #provide a text file with IP/hostname data to populate devices inventory
+6. **'/api/add/<device_hostname>'** #provide a single hostname to add it into populate network devices inventory
+7. **'/api/delete/<device_hostname>'** #provide a single hostname to remove it into populate network devices inventory
 ***
 
 ## Installation
