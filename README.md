@@ -1,4 +1,4 @@
-# Juniper devices inventory project
+# Network devices inventory project
 This python3 Flask project spins up a web application to allow user to populate and consume network devices inventory over web page or API in JSON format.
 In this version the app works with Juniper devices leveraging NetConf protocol to connect to devices and gather their inventory.
 All users and devices data is stored in PostgreSQL DB.
