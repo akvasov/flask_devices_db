@@ -6,9 +6,9 @@ All users and devices data is stored in PostgreSQL DB.
 Flask app utilises next routes:
 ***
 User:
-1. '/signup' #user creation ('SIGNUP_PASSWD' is requied to sign up a user)
-2. '/login' #user login based on user data stored in PostgreSQL DB 'users' table
-3. '/logout' #user logout
+1. **'/signup'** #user creation ('SIGNUP_PASSWD' is requied to sign up a user)
+2. **'/login'** #user login based on user data stored in PostgreSQL DB 'users' table
+3. **'/logout'** #user logout
 ***
 Devices:
 1. '/devices' #provide all network devices inventory stored into PostgreSQL DB 'devices' table
@@ -38,7 +38,7 @@ pipenv install psycopg2 Flask-SQLAlchemy Flask-WTF flask-login WTForms
 pipenv install paramiko junos-eznc
 pipenv install python-dotenv
 ```
-3.PostgreSQL installation and setup:
+3. PostgreSQL installation and setup:
 ```
 yum install postgresql-server postgresql-contrib postgresql-devel postgresql-libs
 postgresql-setup initdb
