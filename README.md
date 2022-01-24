@@ -68,9 +68,6 @@ psql testdb
 testdb=> CREATE TABLE devices (id serial PRIMARY KEY, hostname VARCHAR (100) UNIQUE NOT NULL, ip VARCHAR (100) UNIQUE NOT NULL, chassis VARCHAR (100) NOT NULL, serialnum VARCHAR (100) UNIQUE NOT NULL, version VARCHAR (100) NOT NULL, type VARCHAR (100) NOT NULL, vendor VARCHAR (100) NOT NULL);
 testdb=> CREATE TABLE users (id serial PRIMARY KEY, username VARCHAR (100) UNIQUE NOT NULL, password VARCHAR (100) UNIQUE NOT NULL);
 ```
-## Description
-
-
 ## Implementation
 Works with python3.6 or newer
 ```
