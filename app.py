@@ -14,6 +14,8 @@ from models.device import Device, DeviceJuniper
 from models.user import User
 
 def create_app():
+    load_dotenv()
+
     app = Flask(__name__)
     app.config.from_object("config.Config")
     db.init_app(app)
@@ -21,8 +23,6 @@ def create_app():
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'login'
-
-    load_dotenv()
 
     @app.before_first_request
     def create_tables():
