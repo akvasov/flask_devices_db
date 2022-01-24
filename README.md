@@ -3,14 +3,15 @@ This python3 Flask project spins up a web application to allow user to populate 
 In this version the app works with Juniper devices leveraging NetConf protocol to connect to devices and gather their inventory.
 All users and devices data is stored in PostgreSQL DB.
 
+## Description
 Flask app utilises next routes:
 ***
-User:
+* User:
 1. **'/signup'** #user creation ('SIGNUP_PASSWD' is requied to sign up a user)
 2. **'/login'** #user login based on user data stored in PostgreSQL DB 'users' table
 3. **'/logout'** #user logout
 ***
-Devices:
+* Devices:
 1. **'/devices'** #provide all network devices inventory stored into PostgreSQL DB 'devices' table
 2. **'/devices/<device_hostname>'** #one defined device inventory stored into PostgreSQL DB 'devices' table
 3. **'/api/devices'** #all network devices inventory stored into PostgreSQL DB 'devices' table in JSON format
@@ -19,6 +20,16 @@ Devices:
 6. **'/api/add/<device_hostname>'** #provide a single hostname to add it into populate network devices inventory
 7. **'/api/delete/<device_hostname>'** #provide a single hostname to remove it into populate network devices inventory
 ***
+
+Network devices inventory data stored into PostgreSQL DB table 'devices' columns:
+* **'id'** #relational DB's automatically assigned id 
+* **'hostname'** #device's hostname
+* **'ip'** #device's management IP address
+* **'chassis'** #device's chassis part number
+* **'serialnum'** #device's chassis serial number
+* **'version'** #device's firmware version
+* **'type'** # device's type (assigned based on hostname format)
+* **'vendor'** #device's vendor (always 'Juniper Networks' in this project)
 
 ## Installation
 See 'requirments.txt'
