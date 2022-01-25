@@ -14,11 +14,12 @@ Flask app utilises next routes:
 * Devices:
 1. **'/devices'** #provide all network devices inventory stored into PostgreSQL DB 'devices' table
 2. **'/devices/<device_hostname>'** #one defined device inventory stored into PostgreSQL DB 'devices' table
-3. **'/api/devices'** #all network devices inventory stored into PostgreSQL DB 'devices' table in JSON format
-4. **'/api/devices/<device_hostname>'** #one defined device inventory stored into PostgreSQL DB 'devices' table in JSON format
-5. **'/api/populatedb/<device_filename>'** #provide a text file with IP/hostname data to populate devices inventory
-6. **'/api/add/<device_hostname>'** #provide a single hostname to add it into populate network devices inventory
-7. **'/api/delete/<device_hostname>'** #provide a single hostname to remove it into populate network devices inventory
+3. **'/api/devices'** #GET# all network devices inventory stored into PostgreSQL DB 'devices' table in JSON format
+4. **'/api/devices/<device_hostname>'** #GET# one defined device inventory stored into PostgreSQL DB 'devices' table in JSON format
+5. **'/api/populatedb/<device_filename>'** #GET# provide a text file with IP/hostname data to populate devices inventory
+6. **'/api/add/<device_hostname>'** #POST# provide a single hostname to add it into populate network devices inventory
+   Device IP address should be provided in POST request in JSON Format ```{'ip': 'x.x.x.x'}```
+7. **'/api/delete/<device_hostname>'** #DELETE# provide a single hostname to remove it into populate network devices inventory
 ***
 
 Network devices inventory data stored into PostgreSQL DB table 'devices' columns:

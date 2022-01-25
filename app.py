@@ -123,6 +123,7 @@ def create_app():
             hostnames_list.append(device.hostname)
             db.session.add(device)
             db.session.commit()
+            print("{} device has been added into DB".format(device.hostname))
         return jsonify({'status': 'DB was populated for {}'.format(hostnames_list)}), 200
 
     @app.route('/api/delete/<device_hostname>', methods=['DELETE'])
