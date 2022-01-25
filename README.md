@@ -42,7 +42,7 @@ yum install pip3.6
 yum install gcc openssl-devel bzip2-devel libffi-devel python-devel
 yum install libxml2-devel libxslt-devel redhat-rpm-config
 ```
-###Adding Flask app TCP port 3000 to CentOS firewall
+Adding Flask app TCP port 3000 to CentOS firewall
 ```
 firewall-cmd --zone=public --add-port=3000/tcp
 firewall-cmd --reload
