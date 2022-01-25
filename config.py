@@ -1,3 +1,8 @@
+"""
+Configuration file for Flask and Flask-SQLAlchemy modules.
+All environment variables are stored in local .env file.
+"""
+
 import os
 
 from dotenv import load_dotenv
