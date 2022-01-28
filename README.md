@@ -86,7 +86,7 @@ testdb=> CREATE TABLE devices (id serial PRIMARY KEY, hostname VARCHAR (100) UNI
 testdb=> CREATE TABLE users (id serial PRIMARY KEY, username VARCHAR (100) UNIQUE NOT NULL, password VARCHAR (100) UNIQUE NOT NULL);
 ```
 ## Implementation
-Works with python3.6 or newer
+Works with python3.6 or newer.
 ```
 ]$ python app.py 
 ```
