@@ -16,7 +16,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from jnpr.junos.exception import ConnectError as jnpr_ConnectError
 from sqlalchemy.orm import exc
 from jnpr.junos.exception import ConnectError, ProbeError, ConfigLoadError
-from jnpr.junos import Device as JunDevice
 
 from models.files import FileParcer
 from models.login_forms import LoginForm, SignUPForm
@@ -26,41 +25,50 @@ from models.user import User
 
 def conn_and_populate_db(ip):
     """
-    Connect to a device IP over NetConf and return the inventory data in a
-    dictionary format
+    This is a task method for asyncio to connect to a device, gather inventory data
+    and populate the DB
+    :return Status of the inventory collection based on device reachability
+    or presence into DB:
+        * Failure to connect => 'status': 'Connection failure'
+        * Device is already into DB => 'status': 'Present in DB'
+        * Device is successfully added into DB => 'status': 'Success'
+
+    This function is defined outside of Flask App definition, so to access Flask
+    dependent methods like SQLAlchemy we need to provide app_context().
     """
     try:
         device_data = DeviceJuniper.dev_output_to_dict(ip)
     except (ConnectError, ProbeError, ConfigLoadError) as e:
-        print("Failed to connect to {} with error {}".format(ip, e))
-        return {"status": 'Connection failure', "device": (ip,)}
+        print('Failed to connect to {} with error {}'.format(ip, e))
+        return {'status': 'Connection failure', 'device': (ip,)}
 
     with app.app_context():
         if Device.find_by_hostname(device_data['hostname']):
-            print("{} device is present in DB".format(device_data['hostname']))
-            return {"status": 'Present in DB', "device": (ip, device_data['hostname'])}
+            print('{} device is present in DB'.format(device_data['hostname']))
+            return {'status': 'Present in DB', 'device': (ip, device_data['hostname'])}
 
     with app.app_context():
         db.session.add(Device(**device_data))
         db.session.commit()
-        print("{} device has been added into DB".format(device_data['hostname']))
-        return {"status": 'Success', "device": (ip, device_data['hostname'])}
+        print('{} device has been added into DB'.format(device_data['hostname']))
+        return {'status': 'Success', 'device': (ip, device_data['hostname'])}
 
 
 async def worker(ip, results):
+    """Worker function for asyncio to put tasks into an executor loop """
     loop = asyncio.get_event_loop()
     future_result = loop.run_in_executor(None, conn_and_populate_db, ip)
     result = await future_result
-    if result["status"] == 'Success':
-        results["success"].append(result["device"])
-    elif result["status"] == 'Present in DB':
-        results["Present in DB"].append(result["device"])
-    elif result["status"] == 'Connection failure':
-        results["Connection failure"].append(result["device"])
+    if result['status'] == 'Success':
+        results['success'].append(result['device'])
+    elif result['status'] == 'Present in DB':
+        results['Present in DB'].append(result['device'])
+    elif result['status'] == 'Connection failure':
+        results['Connection failure'].append(result['device'])
 
 
-# Divide up work into batches and collect final results
 async def distribute_work(ip_list, results):
+    """Divide up work into batches and collect final results """
     tasks = []
     for ip in ip_list:
         task = asyncio.create_task(worker(ip, results))
@@ -69,13 +77,15 @@ async def distribute_work(ip_list, results):
 
 
 def concurrent_add_devices(ip_list):
+    """Asyncio run method for distributed workers returning finale results for
+    parallel tasks execution"""
     results = {"success": [], "Present in DB": [], "Connection failure": []}
     asyncio.run(distribute_work(ip_list, results))
     return results
 
 
 def create_app():
-    """Flask app function returning the app itself"""
+    """Flask app function returning itself"""
     load_dotenv() #Loading all env variables from .env file
 
     app = Flask(__name__)

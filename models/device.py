@@ -6,9 +6,7 @@ store this inventory data into POSTGRESQL DB by leveraging Flask-SQLAlchemy
 
 import re
 import os
-import asyncio
 
-from jnpr.junos.exception import ConnectError, ProbeError, ConfigLoadError
 from jnpr.junos import Device as JunDevice
 
 from db import db
@@ -75,8 +73,8 @@ class DeviceJuniper(Device):
     def dev_output_to_dict(cls, ip, username=os.environ.get('USER'),
                            password=os.environ.get('J_PASSWD')):
         """
-        Connect to a device IP over NEtConf and return the inventory data in a
-        dictionary format
+        Connect to a device IP over NetConf and return the inventory data in a
+        dictionary
         """
         dev = JunDevice(host=ip,
                         username=username,
