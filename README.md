@@ -90,6 +90,10 @@ Works with python3.6 or newer.
 ```
 ]$ python app.py 
 ```
+### Versions
+* **'REL-v1.0'** - app route '/api/populatedb/<device_filename>' populates devices inventory by accessing devices sequentially (one by one)
+* **'REL-v2.0'** - app route '/api/populatedb/<device_filename>' populates devices inventory by accessing devices in parallel (utilizing python "asyncio")
+
 ###.env file variables
 ```
 FLASK_ENV=development #Flask environment (development or production)
